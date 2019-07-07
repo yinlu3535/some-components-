@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="../css/common.css">
+	<title>滑块</title>
+	<style>
+		.sliderBar{
+			width:200px;
+			height:6px;
+			background: #8c8c8c;
+			border-radius: 999px;
+			position: relative;
+		}
+		.sliderDot{
+			width:16px;
+			height:16px;
+			background: #1ea0fa;
+			position: absolute;
+			top:-5px;
+			left:0;
+			border-radius: 999px;
+		}
+		.sliderDot::after{
+			content: "";
+			position: absolute;
+			width: 10px;
+			height: 10px;
+			top:3px;
+			left:3px;
+			background:#fff;
+			border-radius:999px;
+		}
+		.sliderMark{
+			position: relative;
+		}
+		.sliderMark dl{
+			user-select: none;
+			position: absolute;
+			top:8px;
+			width:1px;
+		}
+		
+		.sliderMark dt{
+			height:10px;
+			background: #8c8c8c;
+		}
+		.sliderMark dd{
+			position: absolute;
+			top:8px;
+			color:#8c8c8c;
+			font-size:12px;
+			transform: translateX(-50%);
+		}
+	</style>
+</head>
+<body>
+	<div class="mycontainer">
+		 <input id="sliderInput" type="text" min="0" max="100" value="55">
+		<!-- <div class="sliderWrap">
+			<div class="sliderBar">
+				<span class="sliderDot"></span>	
+				<div class="sliderMark">
+					<dl style="left:0">
+						<dt></dt>
+						<dd>0</dd>
+					</dl>
+					<dl style="left:100px">
+						<dt></dt>
+						<dd>50</dd>
+					</dl>
+					<dl style="left:200px">
+						<dt></dt>
+						<dd>100</dd>
+					</dl>
+				</div>		
+			</div>
+		</div> -->
+	</div>
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	
+	<script>
+		(function($) {
+		    $.fn.slider = function(options) {
+
+				var opts = $.extend(true, {}, options);
+
+		        // if (!this.length) {
+		        //     return this;
+		        // }
+	        	function creatDom(min,max,num){
+        			if(max-min<num){
+        				return "<span>参数错误</span>";
+        			}else{
+						var str = `<div class="sliderWrap" style='width:${opts.width}px'>
+									<div class="sliderBar">
+										<span class="sliderDot"></span>	
+										<div class="sliderMark">`;
+								num-=1;
+
+								for(i=0;i<=num;i++){
+									var leftValue = opts.width/num;
+									leftValue*=i;
+									splitValue = leftValue*(max-min)/opts.width;
+									str+="<dl style='left:"+leftValue+"px'>"+
+												"<dt></dt>"+
+												"<dd>"+splitValue+"</dd>"+
+											"</dl>"
+								}
+
+									str+=`</div>		
+									</div>
+								</div>`;
+						return str;
+        			}
+
+	        	}
+
+	        	function bindEvents(sliderDom){
+	        			console.log(sliderDom)
+	        	}
+		        
+		        this.each(function() {
+		            var $this = $(this);
+		            var min = this.min;
+		            var max = this.max;
+		            var num = opts.splitValue||5;
+		            var sliderDom = creatDom(min,max,num);
+		            $(sliderDom).insertAfter($this)
+		            bindEvents($(sliderDom))
+		        });
+		        return this;
+		    };
+
+		})(jQuery);
+	</script>
+	<script>
+	  		$("#sliderInput").slider({
+	  			width:200
+			});
+	</script>
+</body>
+</html>
