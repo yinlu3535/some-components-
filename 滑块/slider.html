@@ -5,8 +5,11 @@
 	<link rel="stylesheet" href="../css/common.css">
 	<title>滑块</title>
 	<style>
+		.sliderWrap{
+	    	height: 32px;
+			padding: 10px 20px;
+		}
 		.sliderBar{
-			width:200px;
 			height:6px;
 			background: #8c8c8c;
 			border-radius: 999px;
@@ -56,7 +59,8 @@
 </head>
 <body>
 	<div class="mycontainer">
-		 <input id="sliderInput" type="text" min="0" max="100" value="55">
+		 <input id="sliderInput" class="sliderInput" type="text" min="0" max="100" value="55">
+		 <input id="sliderInput2" class="sliderInput" type="text" min="0" max="500" value="55">
 		<!-- <div class="sliderWrap">
 			<div class="sliderBar">
 				<span class="sliderDot"></span>	
@@ -83,51 +87,99 @@
 		(function($) {
 		    $.fn.slider = function(options) {
 
-				var opts = $.extend(true, {}, options);
+				var opts = $.extend(true, {}, defaultOption, options);
 
 		        // if (!this.length) {
 		        //     return this;
 		        // }
-	        	function creatDom(min,max,num){
+		        function setValue(left,min,max,obj){
+		        	var value = left/(opts.width-16)*(max-min);
+		        	obj.value = parseInt(value);
+		        }
+
+	        	function creatDom(min,max,num,obj){
         			if(max-min<num){
         				return "<span>参数错误</span>";
         			}else{
-						var str = `<div class="sliderWrap" style='width:${opts.width}px'>
-									<div class="sliderBar">
-										<span class="sliderDot"></span>	
-										<div class="sliderMark">`;
+
+        				var sliderWrap = $("<div ondragstart=\"return false;\" class=\"sliderWrap\"></div>");
+						sliderWrap.width(opts.width||200);
+						sliderWrap[0].ismousedown = false;
+
+						var sliderBar = $('<div class="sliderBar"></div>');
+						var sliderDot = $('<span class="sliderDot"></span>');
+
+						sliderWrap.mousedown(function(){
+							this.ismousedown = true;
+							console.log("mousedown!")
+						})
+						sliderWrap.on("click",function(e){
+							var left = e.pageX-$(this).children(".sliderBar").offset().left;
+							if(left<0)left=0;
+							if(left>opts.width-16)left=opts.width-16;
+							sliderDot.css("left",left);
+							setValue(left,min,max,obj)
+						})	
+						sliderWrap.on("mousemove",function(e){
+							if(this.ismousedown){
+								console.log(e.pageX)
+								var left = e.pageX-$(this).children(".sliderBar").offset().left;
+								if(left<0)left=0;
+								if(left>opts.width-16)left=opts.width-16;
+								sliderDot.css("left",left);
+								setValue(left,min,max,obj)
+							}
+						})	
+						
+						$(document).mouseup(function(){
+							sliderWrap[0].ismousedown = false;
+							console.log("mouseup!")
+						})	
+						sliderWrap.append(sliderBar);
+
+
+						var str = "<div class=\"sliderMark\">";
 								num-=1;
 
 								for(i=0;i<=num;i++){
-									var leftValue = opts.width/num;
-									leftValue*=i;
-									splitValue = leftValue*(max-min)/opts.width;
+									var barWidth = opts.width-16;
+									var leftValue = barWidth/num;
+									leftValue=leftValue*i+8;
+
+									splitValue = (opts.width/num)*i*(max-min)/opts.width;
+
 									str+="<dl style='left:"+leftValue+"px'>"+
 												"<dt></dt>"+
 												"<dd>"+splitValue+"</dd>"+
 											"</dl>"
 								}
 
-									str+=`</div>		
-									</div>
-								</div>`;
-						return str;
+								str+="</div>";
+						sliderBar.append(sliderDot);
+						sliderBar.append($(str));
+						return sliderWrap;
         			}
 
 	        	}
 
-	        	function bindEvents(sliderDom){
-	        			console.log(sliderDom)
+	        	var defaultOption={
+	        		width:200
 	        	}
 		        
 		        this.each(function() {
 		            var $this = $(this);
-		            var min = this.min;
-		            var max = this.max;
-		            var num = opts.splitValue||5;
-		            var sliderDom = creatDom(min,max,num);
-		            $(sliderDom).insertAfter($this)
-		            bindEvents($(sliderDom))
+		            var min = parseInt(this.min)||0;
+		            var max = parseInt(this.max)||100;
+		            var num = parseInt(opts.splitValue)||5;
+		            var sliderDom = creatDom(min,max,num,this);
+		            $(sliderDom).insertAfter($this);
+
+					$this.change(function(){
+						var value = this.value;
+						var left = value/(max-min)*(opts.width-16);
+						sliderDom.find(".sliderDot").css("left",left);
+					})
+
 		        });
 		        return this;
 		    };
@@ -135,9 +187,9 @@
 		})(jQuery);
 	</script>
 	<script>
-	  		$("#sliderInput").slider({
-	  			width:200
-			});
+	  		$(".sliderInput").slider({
+	  			width:400
+  			});
 	</script>
 </body>
 </html>
