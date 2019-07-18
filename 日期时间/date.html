@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>日期时间datetime</title>
+	<link rel="stylesheet" href="./dateTime.css">
+	<style>
+		.mycontainer input{
+			border:1px solid #ccc;
+			padding:6px 10px;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="mycontainer">
+		<input type="text" placeholder="请选择日期" id="date">
+		<input type="text" placeholder="请选择时间" id="time">
+		<input type="text" placeholder="请选择日期和时间" id="datetime">
+	</div>
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="./dateTime.js"></script>
+	<script>
+		$("#date").datetime({
+			type:"date",
+			value:[2019,7,15],
+			success:function(res){
+				console.log(res)
+			}
+		})
+
+		$("#time").datetime({
+			type:"time",
+			value:[12,30]
+		})
+
+		$("#datetime").datetime({
+			type:"datetime",
+			value:[2019,7,15,15,30]
+		})
+	</script>
+</body>
+</html>

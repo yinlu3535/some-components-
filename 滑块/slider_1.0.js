@@ -46,7 +46,7 @@
 					this.ismousedown = true;
 				})
 				sliderWrap.on("click",function(e){
-					var left = e.pageX-$(this).children(".sliderBar").offset().left;
+					var left = e.pageX-$(this).children(".sliderBar").offset().left-opts.sliderDotSize/2;
 					if(left<0)left=0;
 					if(left>opts.width-opts.sliderDotSize)left=opts.width-opts.sliderDotSize;
 					sliderDot.css("left",left);
@@ -54,7 +54,7 @@
 				})	
 				sliderWrap.on("mousemove",function(e){
 					if(this.ismousedown){
-						var left = e.pageX-$(this).children(".sliderBar").offset().left;
+						var left = e.pageX-$(this).children(".sliderBar").offset().left-opts.sliderDotSize/2;
 						if(left<0)left=0;
 						if(left>opts.width-opts.sliderDotSize)left=opts.width-opts.sliderDotSize;
 						sliderDot.css("left",left);
@@ -97,14 +97,18 @@
         
         this.each(function() {
             var $this = $(this);
-            var min = parseInt(this.min)||0;
-            var max = parseInt(this.max)||100;
+            var min = parseInt($this.attr("min"))||0;
+            var max = parseInt($this.attr("max"))||100;
             var step = parseInt(opts.step);
             var sliderDom = creatDom(min,max,step,this);
             $(sliderDom).insertAfter($this);
 
 			$this.change(function(){
+				if(this.value>max) this.value = max;
+				else if(this.value<min) this.value = min;
+
 				var value = this.value;
+
 				var left = (value-min)/(max-min)*(opts.width-opts.sliderDotSize);
 				sliderDom.find(".sliderDot").css("left",left);
 			})
