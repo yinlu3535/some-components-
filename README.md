@@ -15,3 +15,30 @@ author is  曦悦灿荣
         step:100 //刻度大小
       });
     </script>
+    
+*****
+## 日期时间组件
+### 使用方法 
+
+     <input type="text" placeholder="请选择日期" id="date">
+     <input type="text" placeholder="请选择时间" id="time">
+     <input type="text" placeholder="请选择日期和时间" id="datetime">
+     
+    <script>
+		$("#date").datetime({
+			type:"date",
+			value:[2019,9,31],
+			success:function(res){
+				console.log(res)
+			}
+		})
+		$("#time").datetime({
+			type:"time",
+			value:[12,28]
+		})
+		$("#datetime").datetime({
+			type:"datetime",
+			value:[2019,7,15,15,30]
+		})
+	</script>
+*****
