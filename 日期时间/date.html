@@ -19,11 +19,11 @@
 		<input type="text" placeholder="请选择日期和时间" id="datetime">
 	</div>
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script src="./dateTime.js"></script>
+	<script src="./dateTime.min.js"></script>
 	<script>
 		$("#date").datetime({
 			type:"date",
-			value:[2019,7,15],
+			value:[2019,9,31],
 			success:function(res){
 				console.log(res)
 			}
@@ -31,7 +31,7 @@
 
 		$("#time").datetime({
 			type:"time",
-			value:[12,30]
+			value:[12,28]
 		})
 
 		$("#datetime").datetime({
@@ -41,3 +41,4 @@
 	</script>
 </body>
 </html>
+

@@ -21,10 +21,6 @@ ol, ul { list-style: none; }
 /* tables still need 'cellspacing="0"' in the markup */
 table,tr,td { border-collapse: collapse; border-spacing: 0; margin:0;padding:0;}
 caption, th { text-align: left; }
-sup, sub { font-size: 100%; vertical-align: baseline; }
-.fr { float: right; display: inline;}
-.fl { float: left; display: inline;}
-.ehn, .otw, .tow { text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
 .clearfix { clear: both; zoom:1;}
 .clearfix:after { display: block; clear: both; content: "\0020"; visibility: hidden; height: 0; }
 .mycontainer{
@@ -38,7 +34,7 @@ sup, sub { font-size: 100%; vertical-align: baseline; }
     -ms-user-select:none;
     -o-user-select:none;
     user-select:none;
-    background: rgba(0,0,0,0.8);
+    background: #494a4a;
     padding:10px;
     position: fixed;
     left:0;
@@ -56,7 +52,11 @@ sup, sub { font-size: 100%; vertical-align: baseline; }
     background: #1ea0fa;
     color:#fff;
 }
+#dateTime{
+    *float:left
+}
 .dateTimeHead{
+    *overflow:hidden;
     padding:8px 0px 4px;
 }
 .datePart li{
@@ -124,16 +124,17 @@ sup, sub { font-size: 100%; vertical-align: baseline; }
     border-bottom:1px solid #ccc;
 }
 .timePart ol{
-    height:158px;
+    height:180px;
     overflow-y: hidden;
+    *overflow-y: auto;
     overflow-x: hidden;
 }
 .timePart ol:hover{
     overflow-y:auto;
-    
 }
 .timePart ol:hover li{
     padding-left:17px;
+    *padding-left:0;
 }
 .timePart ol li{
     line-height: 30px;
@@ -163,4 +164,7 @@ sup, sub { font-size: 100%; vertical-align: baseline; }
 }
 #yearSelect{
     margin-right: 6px;
+}
+.darkgrey{
+    color:#d0d0d0 !important;
 }
