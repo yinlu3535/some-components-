@@ -19,7 +19,7 @@
 		<input type="text" placeholder="请选择日期和时间" id="datetime">
 	</div>
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script src="./dateTime.min.js"></script>
+	<script src="./dateTime.js"></script>
 	<script>
 		$("#date").datetime({
 			type:"date",
@@ -37,6 +37,36 @@
 		$("#datetime").datetime({
 			type:"datetime",
 			value:[2019,7,15,15,30]
+		})
+	</script>
+	<script>
+		$(function(){
+			if (self != top && !IsPar) {
+        	} else {
+				$('#divQuestion .datebox').unbind("click");
+				weui.datePicker({
+                    start: 1870,
+                    end: 2050,
+                    defaultValue: [year, month, date],
+                    onConfirm: function (result) {
+                        if (!result || result.length == 0) return;
+                        var v_year = result[0];
+                        var v_month = result[1] >= 10 ? result[1] : '0' + result[1];
+                        var v_date = result[2] >= 10 ? result[2] : '0' + result[2];
+                        var v_date_value = v_year + '-' + v_month + '-' + v_date
+                        $(that).val(v_date_value);
+                        $(that).trigger("blur");
+                        if ($(that).next().hasClass("textEdit")&&v_date_value)
+                        $(that).next().removeClass("initStyle").children(".textCont").html(v_date_value).css("display","inline");
+                        if (window.needSaveJoin) {
+                            var divQ = $(that).parents(".field");
+                            saveAnswer(divQ);
+                        }                        
+                    },
+                    id: "dat_" + this.id
+                });
+			}
+
 		})
 	</script>
 </body>

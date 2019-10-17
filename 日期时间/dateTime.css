@@ -28,6 +28,7 @@ caption, th { text-align: left; }
 	margin:40px auto;
 }
 .dateTimeWrap{
+    border-radius: 2px;
     display: none;
     -webkit-user-select:none;
     -moz-user-select:none;
@@ -44,22 +45,23 @@ caption, th { text-align: left; }
     color:#e2e2e2;
     width:240px;
 }
-.datePart li.curDay{
+.dateTimeWrap .datePart li.curDay{
     color:#1ea0fa;
 }
-#dayDat li:hover{
+.dateTimeWrap #dayDat li:hover{
     border:2px double #fff;
     background: #1ea0fa;
     color:#fff;
 }
-#dateTime{
+.dateTimeWrap #dateTime{
     *float:left
 }
-.dateTimeHead{
+.dateTimeWrap .dateTimeHead{
     *overflow:hidden;
     padding:8px 0px 4px;
 }
-.datePart li{
+
+.dateTimeWrap .datePart li{
     border:2px double transparent;
     float: left;
     cursor: default;
@@ -69,13 +71,13 @@ caption, th { text-align: left; }
     text-align: center;
     line-height: 26px;
 }
-.datePart ul{
+.dateTimeWrap .datePart ul{
     overflow: hidden;
 }
-.changeMonth{
+.dateTimeWrap .changeMonth{
     float: right
 }
-.changeMonth #pre,.changeMonth #next{
+.dateTimeWrap .changeMonth #pre,.changeMonth #next{
     display: inline-block;
     width:20px;
     height:20px;
@@ -85,10 +87,10 @@ caption, th { text-align: left; }
     text-align: center;
     line-height:20px;
 }
-.changeMonth #next{
+.dateTimeWrap .changeMonth #next{
     margin-left: 10px;
 }
-.dateTimeFoot span,.timeFooter span{
+.dateTimeWrap .dateTimeFoot span,.timeFooter span{
     cursor: pointer;
     display: inline-block;
     background: #fff;
@@ -100,15 +102,15 @@ caption, th { text-align: left; }
     margin-left: 6px;
     float:right;
 }
-.timePart{
+.dateTimeWrap .timePart{
     text-align:center;
     color:#333;
     line-height: 22px;
 }
-.timePart p,.timePart ul{
+.dateTimeWrap .timePart p,.timePart ul{
     background: #fff;
 }
-.timePart>ul>li{
+.dateTimeWrap .timePart>ul>li{
     float: left;
     width:119px;
     background: #fff;
@@ -116,55 +118,55 @@ caption, th { text-align: left; }
     border:1px solid #ccc;
     border-right:none;
 }
-.timePart ul{
+.dateTimeWrap .timePart ul{
     overflow: hidden;
 }
-.timePart>ul>li p{
+.dateTimeWrap .timePart>ul>li p{
     line-height: 30px;
     border-bottom:1px solid #ccc;
 }
-.timePart ol{
+.dateTimeWrap .timePart ol{
     height:180px;
     overflow-y: hidden;
     *overflow-y: auto;
     overflow-x: hidden;
 }
-.timePart ol:hover{
+.dateTimeWrap .timePart ol:hover{
     overflow-y:auto;
 }
-.timePart ol:hover li{
+.dateTimeWrap .timePart ol:hover li{
     padding-left:17px;
     *padding-left:0;
 }
-.timePart ol li{
+.dateTimeWrap .timePart ol li{
     line-height: 30px;
 }
-.timePart ol li.cur{
+.dateTimeWrap .timePart ol li.cur{
     background: #1ea0fa;
     color: #fff
 }
-.dateTimeFoot,.timeFooter{
+.dateTimeWrap .dateTimeFoot,.timeFooter{
     overflow:hidden;
     margin-top: 10px;
     height: 20px;
 }
-.timeFooter span{
+.dateTimeWrap .timeFooter span{
     width:80px;
 }
-.timeFooter #ensure{
+.dateTimeWrap .timeFooter #ensure{
     width:50px;
 }
-.dateTimeFoot .selTime,.timeFooter .selTime{
+.dateTimeWrap .dateTimeFoot .selTime,.timeFooter .selTime{
     float:left;
     margin-left:0;
     display:none;
 }
-.selTime{
+.dateTimeWrap .selTime{
     width:80px!important;
 }
-#yearSelect{
+.dateTimeWrap #yearSelect{
     margin-right: 6px;
 }
-.darkgrey{
+.dateTimeWrap .darkgrey{
     color:#d0d0d0 !important;
 }
