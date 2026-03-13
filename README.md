@@ -1,5 +1,5 @@
 # 一些组件
-author is  曦悦灿荣
+author is  luker
 *****
 ## slider滑块组件
 ### 使用方法 
